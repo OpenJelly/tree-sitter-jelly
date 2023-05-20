@@ -1,5 +1,4 @@
 ; keywords
-(import) @keyword
 (number) @number
 (flag (flag_delimeter) @keyword)
 (flag name: (identifier) @keyword)
@@ -10,7 +9,8 @@
 [
   "if"
   "menu"
-  "return"
+  "return",
+  "import"
 ] @keyword
 
 ; operators
