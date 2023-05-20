@@ -1,2 +1,12 @@
-text("Hello World!") >> introduction
+import Shortcuts
+#Color: Red #Icon: Sailboat
 
+func test() {
+    return 3
+}
+
+if(ShortcutsInput == "Hello World") {
+    Text("Hey!")
+} else {
+    Text("Hello World")        
+}
