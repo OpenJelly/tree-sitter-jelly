@@ -1,19 +1,24 @@
 {
   "name": "tree-sitter-jelly",
   "version": "1.0.0",
-  "description": "",
+  "description": "Jelly grammer for Tree Sitter",
   "main": "bindings/node",
+  "keywords": [
+    "parser",
+    "lexer"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "parse": "tree-sitter generate && tree-sitter parse example-file.jelly"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "nan": "^2.17.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.8"
   },
+  "repository": "https://github.com/ActuallyTaylor/tree-sitter-jelly",
   "tree-sitter": [
     {
       "scope": "source.jelly",
