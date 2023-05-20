@@ -1,0 +1,2 @@
+"func" @keyword
+"return" @keyword
