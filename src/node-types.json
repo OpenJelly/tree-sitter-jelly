@@ -199,6 +199,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flag_delimeter",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -660,10 +670,6 @@
     "named": false
   },
   {
-    "type": "#",
-    "named": false
-  },
-  {
     "type": "$!",
     "named": false
   },
@@ -762,6 +768,10 @@
   {
     "type": "else",
     "named": false
+  },
+  {
+    "type": "flag_delimeter",
+    "named": true
   },
   {
     "type": "func",

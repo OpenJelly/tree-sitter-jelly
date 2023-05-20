@@ -1,2 +1,1 @@
-"func" @keyword
-"return" @keyword
+queries/highlights.scm

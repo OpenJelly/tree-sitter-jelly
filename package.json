@@ -10,7 +10,7 @@
   "scripts": {
     "parse": "tree-sitter generate && tree-sitter parse example-file.jelly"
   },
-  "author": "",
+  "author": "Taylor Lineman",
   "license": "MIT",
   "dependencies": {
     "nan": "^2.17.0"

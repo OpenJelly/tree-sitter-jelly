@@ -53,8 +53,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "#"
+          "type": "SYMBOL",
+          "name": "flag_delimeter"
         },
         {
           "type": "FIELD",
@@ -77,6 +77,10 @@
           }
         }
       ]
+    },
+    "flag_delimeter": {
+      "type": "STRING",
+      "value": "#"
     },
     "import": {
       "type": "SEQ",

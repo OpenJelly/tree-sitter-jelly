@@ -17,11 +17,13 @@ module.exports = grammar({
 
         // MARK: Flags
         flag: $ => seq(
-            '#',
+            $.flag_delimeter,
             field('name', $.identifier),
             ':',
             field('value', $.identifier)
         ),
+
+        flag_delimeter: $ => "#",
 
         // MARK: Import Statements
         import: $ => seq(
