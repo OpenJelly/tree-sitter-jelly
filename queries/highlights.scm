@@ -9,7 +9,7 @@
 [
   "if"
   "menu"
-  "return",
+  "return"
   "import"
 ] @keyword
 
