@@ -29,6 +29,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "repeat_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "repeat_each_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "statement"
         },
         {
@@ -100,6 +108,64 @@
             "type": "SYMBOL",
             "name": "identifier"
           }
+        }
+      ]
+    },
+    "repeat_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "repeat"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "FIELD",
+          "name": "amount",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
+        }
+      ]
+    },
+    "repeat_each_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "repeatEach"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "FIELD",
+          "name": "variable",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
         }
       ]
     },
@@ -364,7 +430,7 @@
             "type": "REPEAT",
             "content": {
               "type": "SYMBOL",
-              "name": "statement"
+              "name": "_definition"
             }
           }
         }
@@ -836,7 +902,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "statement"
+            "name": "_definition"
           }
         },
         {

@@ -10,3 +10,11 @@ if(ShortcutsInput == "Hello World") {
 } else {
     Text("Hello World")        
 }
+
+repeat(3) {
+    Text("Hello World")        
+}
+
+repeatEach(awesome) {
+    Text("Awesome")
+}

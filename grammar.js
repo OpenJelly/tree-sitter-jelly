@@ -8,6 +8,8 @@ module.exports = grammar({
             $.macro_definition,
             $.menu_definition,
             $.conditional_definition,
+            $.repeat_definition,
+            $.repeat_each_definition,
             $.statement,
             $.flag,
             $.import,
@@ -30,6 +32,23 @@ module.exports = grammar({
             "import",
             /\s+/,
             field('library', $.identifier)
+        ),
+
+        // MARK: Repeat
+        repeat_definition: $ => seq(
+            'repeat',
+            '(',
+            field('amount', $.number),
+            ')',
+            $.block
+        ),
+
+        repeat_each_definition: $ => seq (
+            'repeatEach',
+            '(',
+            field('variable', $.identifier),
+            ')',
+            $.block
         ),
 
         // MARK: Conditional defintions
@@ -95,7 +114,7 @@ module.exports = grammar({
             ':',
             field('statements', 
                 repeat(
-                    $.statement
+                    $._definition
                 )
             )
         ),
@@ -233,7 +252,7 @@ module.exports = grammar({
         // Block of code
         block: $ => seq(
             '{',
-            repeat($.statement),
+            repeat($._definition),
             '}'
         ),
 
