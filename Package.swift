@@ -16,8 +16,36 @@ let package = Package(
         .package(url: "https://github.com/simonbs/Runestone", from: "0.2.10")
     ],
     targets: [
-        .target(name: "TreeSitterJelly", cSettings: [.headerSearchPath("src")]),
-        .target(name: "TreeSitterJellyQueries", resources: [.copy("highlights.scm"), .copy("injections.scm")]),
+        .target(name: "TreeSitterJelly",
+                path: ".",
+                exclude: [
+                    "bindings/",
+                    "queries",
+                    "Sources",
+                    "src/grammar.json",
+                    "src/node-types.json",
+                    "binding.gyp",
+                    "Cargo.lock",
+                    "Cargo.toml",
+                    "example-file.jelly",
+                    "grammar.js",
+                    "LICENSE",
+                    "package-lock.json",
+                    "package.json",
+                    "Package.resolved"
+                ],
+                sources: [
+                    "src/parser.c"
+                ],
+                cSettings: [
+                    .headerSearchPath("src")
+                ]),
+        .target(name: "TreeSitterJellyQueries",
+                path: "queries",
+                resources: [
+                    .copy("highlights.scm"),
+                        .copy("injections.scm")
+                ]),
         .target(name: "TreeSitterJellyRunestone", dependencies: ["Runestone", "TreeSitterJelly", "TreeSitterJellyQueries"]),
     ]
 )
