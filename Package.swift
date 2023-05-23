@@ -35,7 +35,8 @@ let package = Package(
                     "Package.resolved"
                 ],
                 sources: [
-                    "src/parser.c"
+                    "src/parser.c",
+                    "src/scanner.c"
                 ],
                 cSettings: [
                     .headerSearchPath("src")

@@ -1,5 +1,8 @@
 module.exports = grammar({
     name: 'jelly',
+    externals: $ => [
+        $.string_chars
+    ],        
     rules: {
         source_file: $ => repeat($._definition),
     
@@ -10,22 +13,22 @@ module.exports = grammar({
             $.conditional_definition,
             $.repeat_definition,
             $.repeat_each_definition,
-            $.statement,
+            $._statement,
             $.flag,
             $.import,
             $.comment,
-            $.block_comment,
+            $.block_comment
         ),
 
         // MARK: Flags
         flag: $ => seq(
-            $.flag_delimeter,
+            $.flag_delimiter,
             field('name', $.identifier),
             ':',
             field('value', $.identifier)
         ),
 
-        flag_delimeter: $ => "#",
+        flag_delimiter: $ => "#",
 
         // MARK: Import Statements
         import: $ => seq(
@@ -51,7 +54,7 @@ module.exports = grammar({
             $.block
         ),
 
-        // MARK: Conditional defintions
+        // MARK: Conditional definitions
         conditional_definition: $ => seq(
             'if',
             choice('(', /\s+/),
@@ -62,10 +65,10 @@ module.exports = grammar({
             field('secondary', optional($._primitive)),
             choice(')', /\s+/),
             $.block,
-            optional($.coinditional_else) 
+            optional($.conditional_else)
         ),
 
-        coinditional_else: $ => seq(
+        conditional_else: $ => seq(
             'else',
             $.block
         ),
@@ -119,7 +122,7 @@ module.exports = grammar({
             )
         ),
 
-        // MARK: Function & Macro Decleration Defintion
+        // MARK: Function & Macro Declaration Defintion
         function_definition: $ => seq(
             'func',
             field('name', $.identifier),
@@ -137,30 +140,34 @@ module.exports = grammar({
         parameter_list: $ => seq(
             '(',
             repeat(
-                seq(
-                    optional(
-                        seq(
-                            field('parameter_name', $.identifier),
-                            ':',
-                            /\s+/
-                        )
-                    ),
-                    field('item', $._primitive),
-                    optional(','),
-                    optional(/\s+/),
-                )
+                $.parameter_list_item
             ),
             ')'
         ),
+                
+        // TODO: Alter this so there is no longer support for optional parameters.
+        // Any altering I have tried has ended in infinite loops. Not sure why... Needs more work.
+        parameter_list_item: $ => seq(
+            optional(
+                seq(
+                    field('parameter_name', $.identifier),
+                    ':',
+                    /\s+/
+                )
+            ),
+            field('item', $._primitive),
+            optional(','),
+            optional(/\s+/),
+        ),
        
         // MARK: Statements
-        statement: $ => choice(
+        _statement: $ => choice(
             $.function_call,
-            $.variable_decleration,
+            $.variable_declaration,
             $.return_statement
         ),
 
-        variable_decleration: $ => seq(
+        variable_declaration: $ => seq(
             'var',
             /\s+/,
             field('name', $.identifier),
@@ -222,8 +229,8 @@ module.exports = grammar({
             '"',
             repeat(
                 choice(
-                    field("text", $._string_text), 
-                    $._string_interpolation
+                    field("text", $.string_chars), 
+                    field("interpolation", $.string_interpolation)
                 )
             ),
             '"'
@@ -233,19 +240,16 @@ module.exports = grammar({
             '"""',
             repeat(
                 choice(
-                    field("text", $._mutli_line_string_text), 
-                    $._string_interpolation
+                    field("text", $.string_chars), 
+                    field("interpolation", $.string_interpolation)
                 )
             ),
             '"""'
         ),
   
-        _string_text: $ => /[^\\"]+/,
-        _mutli_line_string_text: $ => /[^\\"]+/,
-
-        _string_interpolation: $ => seq(
+        string_interpolation: $ => seq(
             '${',
-            field('interpolation_identifier', $.identifier),
+            field('identifier', $.identifier),
             '}'
         ),
 
