@@ -1,6 +1,6 @@
 ; keywords
 (number) @number
-(flag (flag_delimeter) @keyword)
+(flag (flag_delimiter) @keyword)
 (flag name: (identifier) @keyword)
 
 "func" @keyword.function

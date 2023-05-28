@@ -63,7 +63,11 @@ bool tree_sitter_jelly_external_scanner_scan(void *payload, TSLexer *lexer, cons
     if (valid_symbols[STRING_CHARS]) {
         // A weird for loop that on the first loop has_content is false. All other loops it is true.
         // If the loop returns the first time around, there is no content so we detected no token.
+
         for (bool has_content = false;; has_content = true) {
+            if (lexer->eof(lexer)) {
+                return has_content;
+            }
             lexer->mark_end(lexer);
             switch (lexer->lookahead) {
             case '$':
