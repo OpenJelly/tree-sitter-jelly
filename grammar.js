@@ -164,12 +164,21 @@ module.exports = grammar({
         _statement: $ => choice(
             $.function_call,
             $.variable_declaration,
+            $.set_variable,
             $.return_statement
         ),
 
         variable_declaration: $ => seq(
             'var',
             /\s+/,
+            field('name', $.identifier),
+            /\s+/,
+            '=',
+            /\s+/,
+            field('value', $._primitive)
+        ),
+
+        set_variable: $ => seq(
             field('name', $.identifier),
             /\s+/,
             '=',
@@ -205,7 +214,18 @@ module.exports = grammar({
             $.number
         ),
 
-        identifier: $ => /[a-zA-Z0-9_$]+/,
+        identifier: $ => seq(
+            field('content', $.identifier_content),
+            optional(
+                field('property', 
+                    repeat(
+                        $.variable_property
+                    )
+                )
+            ),
+        ),
+
+        identifier_content: $ => /[a-zA-Z0-9_$]+/,
         
         number: $ => /\d+/,
 
@@ -252,6 +272,16 @@ module.exports = grammar({
             field('identifier', $.identifier),
             '}'
         ),
+
+        variable_property: $ => seq(
+            '.',
+            field('type', $.variable_property_type),
+            '(',
+            field('value', $.identifier),
+            ')'
+        ),
+
+        variable_property_type: $ => choice("as", "get", "key"),
 
         // Block of code
         block: $ => seq(

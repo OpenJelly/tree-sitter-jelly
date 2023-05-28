@@ -1,1 +1,2 @@
-Text(hello)
+var x = "Hello World"
+var y = "Hello ${x.as(String).get(Test)}"
