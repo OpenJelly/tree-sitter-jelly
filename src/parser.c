@@ -685,7 +685,7 @@ enum {
   field_parameter_name = 11,
   field_parameters = 12,
   field_primary = 13,
-  field_properties = 14,
+  field_property = 14,
   field_secondary = 15,
   field_statements = 16,
   field_text = 17,
@@ -709,7 +709,7 @@ static const char * const ts_field_names[] = {
   [field_parameter_name] = "parameter_name",
   [field_parameters] = "parameters",
   [field_primary] = "primary",
-  [field_properties] = "properties",
+  [field_property] = "property",
   [field_secondary] = "secondary",
   [field_statements] = "statements",
   [field_text] = "text",
@@ -758,7 +758,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_value, 1},
   [2] =
     {field_content, 0},
-    {field_properties, 1},
+    {field_property, 1},
   [4] =
     {field_content, 1},
   [5] =

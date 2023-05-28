@@ -799,7 +799,7 @@
           "members": [
             {
               "type": "FIELD",
-              "name": "properties",
+              "name": "property",
               "content": {
                 "type": "REPEAT",
                 "content": {
