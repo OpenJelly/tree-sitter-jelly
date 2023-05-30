@@ -40,18 +40,20 @@ module.exports = grammar({
         // MARK: Repeat
         repeat_definition: $ => seq(
             'repeat',
-            '(',
+            choice('(', /\s+/),
             field('amount', $.number),
-            ')',
-            $.block
+            choice('(', /\s+/),
+            field('body', $.block),
+            field('magic_variable', $.magic_variable_definition),
         ),
 
         repeat_each_definition: $ => seq (
             'repeatEach',
-            '(',
+            choice('(', /\s+/),
             field('variable', $.identifier),
-            ')',
-            $.block
+            choice('(', /\s+/),
+            field('body', $.block),
+            field('magic_variable', $.magic_variable_definition),
         ),
 
         // MARK: Conditional definitions
@@ -59,18 +61,28 @@ module.exports = grammar({
             'if',
             choice('(', /\s+/),
             field('primary', $._primitive),
-            /\s+/,
-            field('operator', optional($.operator)),
-            /\s+/,
-            field('secondary', optional($._primitive)),
+            optional(
+                seq(
+                    /\s+/,
+                    field('operator', optional($.operator)),
+                    /\s+/,
+                    field('secondary', optional($._primitive)),    
+                )
+            ),
             choice(')', /\s+/),
-            $.block,
-            optional($.conditional_else)
+            field('body', $.block),
+            optional(
+                choice(
+                    field('magic_variable', $.magic_variable_definition),
+                    field('else', $.conditional_else)
+                )
+            ),
         ),
 
         conditional_else: $ => seq(
             'else',
-            $.block
+            field('body', $.block),
+            optional(field('magic_variable', $.magic_variable_definition))
         ),
 
         operator: $ => choice(
@@ -91,16 +103,11 @@ module.exports = grammar({
         // MARK: Menu Defintions
         menu_definition: $ => seq(
             'menu',
-            $.menu_parameters,
-            $.menu_block
-        ),
-
-        menu_parameters: $ => seq(
-            '(',
-            $.string,
-            ',',
-            $.array,
-            ')',
+            choice('(', /\s+/),
+            field("prompt", $.string),
+            choice('(', /\s+/),
+            field("body", $.menu_block),
+            optional(field('magic_variable', $.magic_variable_definition))
         ),
     
         menu_block: $ => seq(
@@ -109,19 +116,22 @@ module.exports = grammar({
             '}'
         ),
 
+        // The following two rules are a little odd and need to be updated in the future. 
+        // The menu_case_body has the : because it can not match the empty string. 
+        // However, this really should be included in menu_case.
         menu_case: $ => seq(
             'case',
-            '(',
+            optional('('),
             field('case', $.string),
-            ')',
-            ':',
-            field('statements', 
-                repeat(
-                    $._definition
-                )
-            )
+            optional(')'),
+            field('body', $.menu_case_body),
         ),
 
+        menu_case_body: $ => seq(
+            ':',
+            repeat($._definition)
+        ),
+        
         // MARK: Function & Macro Declaration Defintion
         function_definition: $ => seq(
             'func',
@@ -139,9 +149,7 @@ module.exports = grammar({
 
         parameter_list: $ => seq(
             '(',
-            repeat(
-                $.parameter_list_item
-            ),
+            repeat($.parameter_list_item),
             ')'
         ),
                 

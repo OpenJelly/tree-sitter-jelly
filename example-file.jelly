@@ -1,2 +1,7 @@
-var x = "Hello World"
-var y = "Hello ${x.as(String).get(Test)}"
+repeat 4 {
+
+} >> Hello
+
+repeatEach Hello {
+
+} >> Hello2
