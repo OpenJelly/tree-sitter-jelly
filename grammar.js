@@ -25,7 +25,8 @@ module.exports = grammar({
             $.flag_delimiter,
             field('name', $.identifier),
             ':',
-            field('value', $.identifier)
+            field('value', $.identifier),
+            optional(',')
         ),
 
         flag_delimiter: $ => "#",

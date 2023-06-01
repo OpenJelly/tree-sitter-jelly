@@ -66,8 +66,10 @@ bool tree_sitter_jelly_external_scanner_scan(void *payload, TSLexer *lexer, cons
 
         for (bool has_content = false;; has_content = true) {
             if (lexer->eof(lexer)) {
+                lexer->mark_end(lexer);
                 return has_content;
             }
+            
             lexer->mark_end(lexer);
             switch (lexer->lookahead) {
             case '$':

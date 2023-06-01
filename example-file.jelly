@@ -1,7 +1,2 @@
-repeat 4 {
-
-} >> Hello
-
-repeatEach Hello {
-
-} >> Hello2
+import Shortcuts
+#Color: red, #Icon: shortcuts
