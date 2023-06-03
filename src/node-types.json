@@ -330,6 +330,16 @@
     "type": "function_definition",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -346,16 +356,6 @@
         "types": [
           {
             "type": "parameter_list",
-            "named": true
-          }
-        ]
-      },
-      "statements": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
             "named": true
           }
         ]
@@ -408,6 +408,16 @@
     "type": "macro_definition",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -424,16 +434,6 @@
         "types": [
           {
             "type": "parameter_list",
-            "named": true
-          }
-        ]
-      },
-      "statements": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "block",
             "named": true
           }
         ]

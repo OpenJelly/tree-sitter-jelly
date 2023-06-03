@@ -637,7 +637,7 @@
         },
         {
           "type": "FIELD",
-          "name": "statements",
+          "name": "body",
           "content": {
             "type": "SYMBOL",
             "name": "block"
@@ -670,7 +670,7 @@
         },
         {
           "type": "FIELD",
-          "name": "statements",
+          "name": "body",
           "content": {
             "type": "SYMBOL",
             "name": "block"

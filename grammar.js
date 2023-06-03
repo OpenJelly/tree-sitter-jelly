@@ -138,14 +138,14 @@ module.exports = grammar({
             'func',
             field('name', $.identifier),
             field('parameters', $.parameter_list),
-            field('statements', $.block)
+            field('body', $.block),
         ),
     
         macro_definition: $ => seq(
             'macro',
             field('name', $.identifier),
             field('parameters', $.parameter_list),
-            field('statements', $.block)
+            field('body', $.block),
         ),
 
         parameter_list: $ => seq(
