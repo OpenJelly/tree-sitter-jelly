@@ -234,7 +234,7 @@ module.exports = grammar({
             ),
         ),
 
-        identifier_content: $ => /[a-zA-Z0-9_$]+/,
+        identifier_content: $ => /[a-zA-Z0-9_$-]+/,
         
         number: $ => /\d+/,
 
