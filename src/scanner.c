@@ -1,5 +1,5 @@
 #include <tree_sitter/parser.h>
-
+#include <stdio.h>
 enum TokenType {
   STRING_CHARS
 };
@@ -64,6 +64,7 @@ bool tree_sitter_jelly_external_scanner_scan(void *payload, TSLexer *lexer, cons
         // A weird for loop that on the first loop has_content is false. All other loops it is true.
         // If the loop returns the first time around, there is no content so we detected no token.
 
+        bool isEscaped;
         for (bool has_content = false;; has_content = true) {
             if (lexer->eof(lexer)) {
                 lexer->mark_end(lexer);
@@ -71,16 +72,31 @@ bool tree_sitter_jelly_external_scanner_scan(void *payload, TSLexer *lexer, cons
             }
             
             lexer->mark_end(lexer);
+            
             switch (lexer->lookahead) {
             case '$':
                 lexer->advance(lexer, false);
+                if (isEscaped) {
+                    isEscaped = false;
+                    break;
+                }
                 if (lexer->lookahead == '{') {
                     return has_content;
                 }
                 break;
             case '"':
-                return has_content;
+                if (!isEscaped) {
+                    return has_content;
+                } else {
+                    isEscaped = false;
+                    lexer->advance(lexer, false);
+                    break;
+                }
+            case 92:
+                isEscaped = true;
+                lexer->advance(lexer, false);
             default:
+                isEscaped = false;
                 lexer->advance(lexer, false);
             }
         }

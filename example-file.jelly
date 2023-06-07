@@ -1,5 +1,2 @@
-if function-dispatch-172A0F71-D33B-499F-BDB0-C65FC3A5D79E == "hello" {
-
-} else {
-
-}
+dictionary(json: "{\"FUNCTION_CALL_NAME\":\"hello\", \"text\":\"World\"}") >> dictionaryVariable
+runShortcut(name: "Test Shortcut", input: dictionaryVariable)
