@@ -1,2 +1,1 @@
-dictionary(json: "{\"FUNCTION_CALL_NAME\":\"hello\", \"text\":\"World\"}") >> dictionaryVariable
-runShortcut(name: "Test Shortcut", input: dictionaryVariable)
+var test = ShortcutInput.as(Dictionary).key(FUNCTION_CALL_NAME)
