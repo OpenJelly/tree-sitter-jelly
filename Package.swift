@@ -5,15 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "TreeSitterJelly",
-    platforms: [.iOS(.v14)],
     products: [
         .library(name: "TreeSitterJelly", targets: ["TreeSitterJelly"]),
         .library(name: "TreeSitterJellyQueries", targets: ["TreeSitterJellyQueries"]),
-        .library(name: "TreeSitterJellyRunestone", targets: ["TreeSitterJellyRunestone"]),
-
-    ],
-    dependencies: [
-        .package(url: "https://github.com/simonbs/Runestone", from: "0.2.10")
     ],
     targets: [
         .target(name: "TreeSitterJelly",
@@ -21,7 +15,6 @@ let package = Package(
                 exclude: [
                     "bindings/",
                     "queries",
-                    "Sources",
                     "src/grammar.json",
                     "src/node-types.json",
                     "binding.gyp",
@@ -47,6 +40,5 @@ let package = Package(
                     .copy("highlights.scm"),
                         .copy("injections.scm")
                 ]),
-        .target(name: "TreeSitterJellyRunestone", dependencies: ["Runestone", "TreeSitterJelly", "TreeSitterJellyQueries"]),
     ]
 )
