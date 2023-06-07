@@ -11,6 +11,7 @@
   "menu"
   "return"
   "import"
+  "var"
 ] @keyword
 
 ; operators
