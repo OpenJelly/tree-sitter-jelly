@@ -1,1 +1,3 @@
-var test = ShortcutInput.as(Dictionary).key(FUNCTION_CALL_NAME)
+    repeat 1 {
+        var x = RepeatIndex
+    }

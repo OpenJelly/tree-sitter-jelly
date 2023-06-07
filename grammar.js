@@ -43,18 +43,18 @@ module.exports = grammar({
             'repeat',
             choice('(', /\s+/),
             field('amount', $.number),
-            choice('(', /\s+/),
+            choice(')', /\s+/),
             field('body', $.block),
-            field('magic_variable', $.magic_variable_definition),
+            optional(field('magic_variable', $.magic_variable_definition))
         ),
 
         repeat_each_definition: $ => seq (
             'repeatEach',
             choice('(', /\s+/),
             field('variable', $.identifier),
-            choice('(', /\s+/),
+            choice(')', /\s+/),
             field('body', $.block),
-            field('magic_variable', $.magic_variable_definition),
+            optional(field('magic_variable', $.magic_variable_definition))
         ),
 
         // MARK: Conditional definitions

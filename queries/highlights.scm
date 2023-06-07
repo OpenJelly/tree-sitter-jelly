@@ -12,6 +12,8 @@
   "return"
   "import"
   "var"
+  "repeat"
+  "repeatEach"
 ] @keyword
 
 ; operators
