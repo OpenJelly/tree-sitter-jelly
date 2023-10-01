@@ -236,7 +236,8 @@ module.exports = grammar({
 
         identifier_content: $ => /[a-zA-Z0-9_$-]+/,
         
-        number: $ => /\d+/,
+        // https://stackoverflow.com/a/12643073/14886210
+        number: $ => /[+-]?([0-9]*[.])?[0-9]+/,
 
         // Array
         array: $ => seq(
