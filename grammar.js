@@ -161,7 +161,7 @@ module.exports = grammar({
                 seq(
                     field('parameter_name', $.identifier),
                     ':',
-                    /\s+/
+                    optional(/\s+/)
                 )
             ),
             field('item', $._primitive),

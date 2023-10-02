@@ -1,3 +1,1 @@
-    repeat 1 {
-        var x = RepeatIndex
-    }
+wait(seconds:3)
