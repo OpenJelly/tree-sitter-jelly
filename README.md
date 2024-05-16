@@ -5,7 +5,7 @@
 </a>
 
 
-[Tree Sitter Grammar](https://github.com/tree-sitter/tree-sitter) for the Jelly language.
+[Tree Sitter Grammar](https://tree-sitter.github.io/tree-sitter/) for the Jelly language.
 
 Tree-sitter-jelly is a parsing library that converts Jelly language code into detailed syntax trees, enabling advanced features like syntax highlighting, code folding, and precise error detection in development tools. It provides efficient incremental parsing, allowing real-time updates as the code changes, which enhances the overall coding experience.
 
